@@ -1,12 +1,11 @@
 
 import React from 'react';
 import ChatMessage from './ChatMessage';
-import { mockMessages } from '../data/mockData';
 
-const ChatHistory = () => {
+const ChatHistory = ({ messages }) => {
   return (
     <div className="flex-1 p-6 overflow-y-auto">
-      {mockMessages.map(message => (
+      {messages.map(message => (
         <ChatMessage key={message.id} message={message} />
       ))}
     </div>

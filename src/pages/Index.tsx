@@ -5,9 +5,11 @@ import ChatHeader from '../components/ChatHeader';
 import ChatHistory from '../components/ChatHistory';
 import ChatInput from '../components/ChatInput';
 import { mockMessages } from '../data/mockData';
+import { PanelLeft } from 'lucide-react';
 
 const Index = () => {
   const [messages, setMessages] = useState(mockMessages);
+  const [showSidebar, setShowSidebar] = useState(true);
 
   const handleSendMessage = (content) => {
     const newMessage = {
@@ -23,17 +25,32 @@ const Index = () => {
     // and then add the response from the AI bot
   };
 
+  const toggleSidebar = () => {
+    setShowSidebar(!showSidebar);
+  };
+
   return (
     <div className="flex h-screen">
-      {/* Sidebar - 1/4 width on desktop */}
-      <div className="hidden md:block md:w-80 h-full">
-        <ChatSidebar />
-      </div>
+      {/* Sidebar - hidden on mobile and toggled by the showSidebar state */}
+      {showSidebar && (
+        <div className="hidden md:block md:w-80 h-full">
+          <ChatSidebar />
+        </div>
+      )}
 
-      {/* Chat Area - 3/4 width on desktop, full on mobile */}
+      {/* Chat Area - full width when sidebar is hidden */}
       <div className="flex flex-col flex-1 h-full">
-        <ChatHeader />
-        <ChatHistory />
+        <div className="flex items-center p-4 border-b">
+          <button 
+            onClick={toggleSidebar} 
+            className="p-2 mr-2 rounded-full hover:bg-gray-100"
+            aria-label={showSidebar ? "Hide sidebar" : "Show sidebar"}
+          >
+            <PanelLeft size={20} className="text-gray-500" />
+          </button>
+          <ChatHeader />
+        </div>
+        <ChatHistory messages={messages} />
         <ChatInput onSendMessage={handleSendMessage} />
       </div>
     </div>

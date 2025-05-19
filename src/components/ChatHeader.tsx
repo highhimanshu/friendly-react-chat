@@ -4,7 +4,7 @@ import { Download, Clipboard } from 'lucide-react';
 
 const ChatHeader = () => {
   return (
-    <div className="flex items-center justify-between p-4 border-b">
+    <div className="flex items-center justify-between flex-1">
       <h2 className="text-lg font-medium text-gray-700">Lorem ipsum dolor</h2>
       <div className="flex space-x-2">
         <button className="p-2 rounded-full hover:bg-gray-100">
