@@ -9,7 +9,7 @@ import { PanelLeft } from 'lucide-react';
 
 const Index = () => {
   const [messages, setMessages] = useState(mockMessages);
-  const [showSidebar, setShowSidebar] = useState(true);
+  const [showSidebar, setShowSidebar] = useState(false); // Start with sidebar closed on mobile
 
   const handleSendMessage = (content) => {
     const newMessage = {
@@ -33,7 +33,7 @@ const Index = () => {
     <div className="flex h-screen">
       {/* Sidebar - conditionally shown based on showSidebar state */}
       {showSidebar && (
-        <div className="w-80 h-full md:block">
+        <div className="w-64 h-full fixed z-10 bg-white border-r shadow-lg">
           <ChatSidebar />
         </div>
       )}
