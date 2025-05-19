@@ -1,11 +1,40 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+
+import React, { useState } from 'react';
+import ChatSidebar from '../components/ChatSidebar';
+import ChatHeader from '../components/ChatHeader';
+import ChatHistory from '../components/ChatHistory';
+import ChatInput from '../components/ChatInput';
+import { mockMessages } from '../data/mockData';
 
 const Index = () => {
+  const [messages, setMessages] = useState(mockMessages);
+
+  const handleSendMessage = (content) => {
+    const newMessage = {
+      id: messages.length + 1,
+      sender: 'You',
+      content,
+      timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+    };
+    
+    setMessages([...messages, newMessage]);
+    
+    // In a real app, you would send this message to an API
+    // and then add the response from the AI bot
+  };
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-gray-600">Start building your amazing project here!</p>
+    <div className="flex h-screen">
+      {/* Sidebar - 1/4 width on desktop */}
+      <div className="hidden md:block md:w-80 h-full">
+        <ChatSidebar />
+      </div>
+
+      {/* Chat Area - 3/4 width on desktop, full on mobile */}
+      <div className="flex flex-col flex-1 h-full">
+        <ChatHeader />
+        <ChatHistory />
+        <ChatInput onSendMessage={handleSendMessage} />
       </div>
     </div>
   );
