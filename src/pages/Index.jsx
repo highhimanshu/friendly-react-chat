@@ -31,9 +31,9 @@ const Index = () => {
 
   return (
     <div className="flex h-screen">
-      {/* Sidebar - hidden on mobile and toggled by the showSidebar state */}
+      {/* Sidebar - conditionally shown based on showSidebar state */}
       {showSidebar && (
-        <div className="hidden md:block md:w-80 h-full">
+        <div className="w-80 h-full md:block">
           <ChatSidebar />
         </div>
       )}
